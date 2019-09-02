@@ -48,6 +48,11 @@ class User
      */
     private $votes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Conference", inversedBy="users")
+     */
+    private $conference;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
@@ -145,6 +150,18 @@ class User
                 $vote->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getConference(): ?Conference
+    {
+        return $this->conference;
+    }
+
+    public function setConference(?Conference $conference): self
+    {
+        $this->conference = $conference;
 
         return $this;
     }
