@@ -26,6 +26,11 @@ class Vote
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Conference", inversedBy="votes")
+     */
+    private $users;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class Vote
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getUsers(): ?Conference
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?Conference $users): self
+    {
+        $this->users = $users;
 
         return $this;
     }
