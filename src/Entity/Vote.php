@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @property  conference
+ * @property Conference|null conference
  * @ORM\Entity(repositoryClass="App\Repository\VoteRepository")
  */
 class Vote
@@ -29,7 +31,6 @@ class Vote
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Conference", inversedBy="votes")
      */
-    private $users;
 
     public function getId(): ?int
     {
@@ -60,15 +61,13 @@ class Vote
         return $this;
     }
 
-    public function getUsers(): ?Conference
+    public function getConference(): ?Conference
     {
-        return $this->users;
+        return $this->conference;
     }
-
-    public function setUsers(?Conference $users): self
+    public function setConference(?Conference $conference): self
     {
-        $this->users = $users;
-
+        $this->conference = $conference;
         return $this;
     }
 }
