@@ -9,6 +9,7 @@
 {% block body %}
 
 {% block nav %}
+{% include "browser/browser.html.twig" %}
 {% endblock nav %}
 {% if is_granted('IS_AUTHENTICATED_FULLY') %} 
 <p>Welcome {{ app.user.firstname }}</p>
