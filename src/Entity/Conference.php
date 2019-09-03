@@ -24,29 +24,24 @@ class Conference
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=255)
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime")
+     * @ Assert\GreaterThan("today")
      */
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="conference")
      */
     private $votes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="conference")
-     */
-    private $users;
 
     public function __construct()
     {
         $this->votes = new ArrayCollection();
-        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -102,7 +97,7 @@ class Conference
     {
         if (!$this->votes->contains($vote)) {
             $this->votes[] = $vote;
-            $vote->setUsers($this);
+            $vote->setConference($this);
         }
 
         return $this;
@@ -113,39 +108,8 @@ class Conference
         if ($this->votes->contains($vote)) {
             $this->votes->removeElement($vote);
             // set the owning side to null (unless already changed)
-            if ($vote->getUsers() === $this) {
-                $vote->setUsers(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setConference($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getConference() === $this) {
-                $user->setConference(null);
+            if ($vote->getConference() === $this) {
+                $vote->setConference(null);
             }
         }
 
