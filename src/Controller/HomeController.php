@@ -19,15 +19,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class HomeController extends Controller
 {
     /**
-     * @Route("/", name="home")
-     */
-    public function index()
-    {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
-    /**
      * @Route("/conference/{id}", name="conferenceId")
      */
     public function conferenceId(Conference $conference)
