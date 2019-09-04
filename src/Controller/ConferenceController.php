@@ -48,6 +48,12 @@ class ConferenceController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/conference/edit_conference/{id}", name="edit_conference")
+     * @param Request $request
+     * @param Conference|null $conference
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     public function edit(Request $request, Conference $conference = null)
     {
         if (!$conference) {
@@ -68,6 +74,11 @@ class ConferenceController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/conference/topten", name="topten")
+     * @param VoteRepository $voteRepository
+     * @return Response
+     */
     public function topTen(VoteRepository $voteRepository)
     {
         $conferences = $voteRepository->avgTopTen();
