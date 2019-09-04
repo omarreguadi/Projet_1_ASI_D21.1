@@ -11,10 +11,15 @@
 {% block nav %}
 {% include "browser/browser.html.twig" %}
 {% endblock nav %}
-{% if is_granted('IS_AUTHENTICATED_FULLY') %} 
+{% if is_granted('ROLE_ADMIN') %} 
+<p>Welcome {{ app.user.email }}</p>
+
+{% elseif is_granted('ROLE_USER') %}   
 <p>Welcome {{ app.user.firstname }}</p>
-{% else %}   
+
+{% else %}
 <p>Welcome Anonymous</p>
+
 {% endif %}
 
 {% endblock %}
