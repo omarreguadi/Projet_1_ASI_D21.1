@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conférence de {{ conference.title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-3 mb-3">
+            <div class="col m8 offset-m2">
+                <div class="card blue-grey darken-1 pd-4">
+                    <div class="card-content white-text">
+                        <span class="card-title">
+                            {{ conference.title }}
+                        </span>
+                        <p>{{ conference.description }}</p>
+                        <p class="pt-1">{{ conference.createdAt|date("d/m/Y") }}</p>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {% if app.user.roles[0] == "ROLE_USER" %}
+                                <div class="rating">
+                                    <a href="{{ path('vote', {'id': conference.id, 'note':'5'}) }}"
+                                       title="Donner 5 étoiles">☆</a>
+                                    <a href="{{ path('vote', {'id': conference.id, 'note':'4'}) }}"
+                                       title="Donner 4 étoiles">☆</a>
+                                    <a href="{{ path('vote', {'id': conference.id, 'note':'3'}) }}"
+                                       title="Donner 3 étoiles">☆</a>
+                                    <a href="{{ path('vote', {'id': conference.id, 'note':'2'}) }}"
+                                       title="Donner 2 étoiles">☆</a>
+                                    <a href="{{ path('vote', {'id': conference.id, 'note':'1'}) }}"
+                                       title="Donner 1 étoile">☆</a>
+                                </div>
+                            {% endif %}
+                        {% else %}
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

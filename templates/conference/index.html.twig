@@ -1,15 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ConferenceController!{% endblock %}
-
+{% block title %}Conference{% endblock %}
 {% block body %}
-{% block nav %}
-{% include "browser/browser.html.twig" %}
-{% endblock nav %}
-    {{ form_start(form) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.createdAt) }}
-    {{ form_row(form.add) }}
-    {{ form_end(form) }}
+    {% block nav %}
+        {% include "browser/browser.html.twig" %}
+    {% endblock nav %}
+    <div class="container-fluid col-2 text-center mt-4">
+        {{ form_start(form) }}
+        <div class="form-group mt-3">
+            {{ form_row(form.title, {'attr': {'class': 'form-control text-center'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.description, {'attr': {'class': 'form-control text-center'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.createdAt, {'attr': {'class': 'form-control text-center'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.add, {'attr': {'class': 'form-control btn btn-danger'}}) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

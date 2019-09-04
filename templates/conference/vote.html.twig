@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConferenceController!{% endblock %}
+
+{% block body %}
+{% block nav %}
+{% include "browser/browser.html.twig" %}
+{% endblock nav %}
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.createdAt) }}
+    {{ form_row(form.add) }}
+    {{ form_end(form) }}
+{% endblock %}
