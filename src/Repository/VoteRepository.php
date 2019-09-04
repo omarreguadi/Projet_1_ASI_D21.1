@@ -14,6 +14,51 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class VoteRepository extends ServiceEntityRepository
 {
+    public function avgTopTen()
+    {
+        return $this->createQueryBuilder('v')
+        ->select("avg(v.score) as score_avg, c.id, c.title")
+        ->join("v.conference", 'c')
+        ->groupBy('v.conference')
+        ->orderBy('score_avg', 'desc')
+        ->setMaxResults(10)
+        ->getQuery()
+            ->getResult();
+    }
+    public function avgByUser($parameter){
+        return $this->createQueryBuilder('v')
+            ->select("avg(v.score) as scoreAvg, c.id, c.title, c.description, c.createdAt")
+            ->join('v.conference', 'c')
+            ->join('v.user','u')
+            ->where('v.user = :parameter')
+            ->groupBy('c.id')
+            ->setParameter('parameter', $parameter)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function avgWithoutUser($parameter){
+        return $this->createQueryBuilder('v')
+            ->select("avg(v.score) as scoreAvg, c.name, c.description, c.createdAt, c.id")
+            ->join('v.conference', 'c')
+            ->join('v.user','u')
+            ->where('v.user != :parameter')
+            ->groupBy('c.id')
+            ->setParameter('parameter', $parameter)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function avg(){
+        return $this->createQueryBuilder('v')
+            ->select("avg(v.score) as scoreAvg, c.id ")
+            ->join('v.conference', 'c')
+            ->groupBy('c.id')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Vote::class);
