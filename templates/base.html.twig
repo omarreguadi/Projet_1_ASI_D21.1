@@ -7,7 +7,11 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+        {% block nav %}
+                {% include "browser/browser.html.twig" %}
+        {% endblock nav %}
+        {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
