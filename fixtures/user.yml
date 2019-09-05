@@ -3,7 +3,7 @@ App\Entity\User:
     firstname: <firstName()>
     lastname: <lastName()>
     email: <email()>
-    password: <passwordEncode(@self, 'admin')>
+    password: <password()>
 
   user_{1}:
     email: "admin@admin.com"
