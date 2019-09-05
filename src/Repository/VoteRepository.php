@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Repository;
-
 use App\Entity\Vote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-
 /**
  * @method Vote|null find($id, $lockMode = null, $lockVersion = null)
  * @method Vote|null findOneBy(array $criteria, array $orderBy = null)
@@ -19,7 +16,6 @@ class VoteRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Vote::class);
     }
-
     public function averageTopDix()
     {
         return $this->createQueryBuilder('v')// Base pour crée nimporte quelle requete
@@ -31,8 +27,7 @@ class VoteRepository extends ServiceEntityRepository
         ->getQuery()
             ->getResult();
     }
-
-    public function avgByUser($parameter){
+    public function averageByUser($parameter){
         return $this->createQueryBuilder('v')
             ->select("avg(v.score) as scoreAvg, c.title, c.description, c.createdAt, c.id")
             ->join('v.conference', 'c')
@@ -43,9 +38,7 @@ class VoteRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    public function avgWithoutUser($parameter){
-
+    public function averageWithoutUser($parameter){
         return $this->createQueryBuilder('v')
             ->select("avg(v.score) as scoreAvg, c.title, c.description, c.createdAt, c.id")
             ->join('v.conference', 'c')
@@ -64,7 +57,6 @@ class VoteRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
     // /**
     //  * @return Vote[] Returns an array of Vote objects
     //  */
@@ -81,7 +73,6 @@ class VoteRepository extends ServiceEntityRepository
         ;
     }
     */
-
     /*
     public function findOneBySomeField($value): ?Vote
     {
