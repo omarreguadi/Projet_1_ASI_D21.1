@@ -18,6 +18,57 @@ use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 class HomeController extends Controller
 {
+
+
+    /**
+     * @Route("/", name="home")
+     */
+    public function showConf(ConferenceRepository $conferenceRepository, VoteRepository $voteRepository ,Request $request)
+    {
+        $conf = $conferenceRepository->findAll();
+        $vote = $voteRepository->avg();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $conf, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
+        return $this->render('home/index.html.twig', [
+            'pagination' => $pagination,
+            'avg' => $vote
+        ]);
+    }
+    /**
+     * @Route("/conference/{id}/{note}", name="vote")
+     */
+    public function vote(Conference $conference, int $note, EntityManagerInterface $entityManager)
+    {
+        if($this->getUser() !== null){
+            if($this->getUser()->getRoles()[0] == "ROLE_USER"){
+                if(in_array("ROLE_ADMIN", $this->getUser()->getRoles()) == "ROLE_ADMIN") {
+                    throw new Exception("Admin can't modified");
+                }else {
+                    $userVote = $this->getUser()->getUserVote()->toArray();
+                    foreach ($userVote as $value) {
+                        if ($value->getConference()->getId() == $conference->getId()) {
+                            throw new Exception("User has already vote ");
+                        }
+                    }
+                    $votes = new Vote();
+                    $votes->setUser($this->getUser());
+                    $votes->setConference($conference);
+                    $votes->setScore($note);
+
+                    $entityManager->persist($votes);
+                    $entityManager->flush();
+                    return $this->redirectToRoute('home');
+                }
+            }
+        } else{
+            throw new Exception("User not connected");
+        }
+    }
     /**
      * @Route("/conference/{id}", name="conferenceId")
      */

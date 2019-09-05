@@ -4,7 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+
     "content-hash": "401385bd66ffa64cdb485581037cb38c",
+
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1316,6 +1318,7 @@
             "time": "2014-01-12T16:20:24+00:00"
         },
         {
+
             "name": "knplabs/knp-components",
             "version": "v2.2.0",
             "source": {
@@ -1454,6 +1457,7 @@
             "time": "2019-06-27T07:23:50+00:00"
         },
         {
+
             "name": "ocramius/package-versions",
             "version": "1.5.1",
             "source": {
@@ -1717,6 +1721,7 @@
             "time": "2018-11-20T15:27:04+00:00"
         },
         {
+
             "name": "pugx/autocompleter-bundle",
             "version": "v1.4.3",
             "source": {
@@ -1776,6 +1781,7 @@
             "time": "2019-03-12T14:34:30+00:00"
         },
         {
+
             "name": "swiftmailer/swiftmailer",
             "version": "v6.2.1",
             "source": {
@@ -4235,6 +4241,7 @@
             "time": "2019-06-18T15:27:04+00:00"
         },
         {
+
             "name": "symfony/translation",
             "version": "v4.3.4",
             "source": {
@@ -4311,6 +4318,7 @@
             "time": "2019-08-26T08:55:16+00:00"
         },
         {
+
             "name": "symfony/translation-contracts",
             "version": "v1.1.6",
             "source": {
@@ -4580,6 +4588,7 @@
             "time": "2019-08-20T14:27:59+00:00"
         },
         {
+
             "name": "twig/twig",
             "version": "v2.11.3",
             "source": {
@@ -4647,6 +4656,7 @@
             "time": "2019-06-18T15:37:11+00:00"
         },
         {
+
             "name": "zendframework/zend-code",
             "version": "3.3.2",
             "source": {
@@ -5610,6 +5620,7 @@
                 "text"
             ],
             "time": "2018-12-05T18:34:18+00:00"
+
         }
     ],
     "aliases": [],

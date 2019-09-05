@@ -1,15 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ConferenceController!{% endblock %}
-
 {% block body %}
-{% block nav %}
-{% include "browser/browser.html.twig" %}
-{% endblock nav %}
-    {{ form_start(form) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.createdAt) }}
-    {{ form_row(form.add) }}
-    {{ form_end(form) }}
+    <div class="container-fluid col-2 text-center mt-4 mb-3">
+        <div class="row mt-3">
+            <div class="col s4 offset-s4">
+                <div class="card-panel hoverable">
+                    {{ form_start(form) }}
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">subtitles</i>
+                            {{ form_widget(form.title, {'id': 'title', 'attr': {'class': 'validate'}}) }}
+                            <label for="title" class="center-align">Titre</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">perm_contact_calendar</i>
+                            {{ form_widget(form.createdAt, {'id': 'dateCreation', 'attr': {'class': 'validate'}}) }}
+                            <label for="dateCreation" class="center-align">Date de creation</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">edit</i>
+                            {{ form_widget(form.description, { 'id': 'textarea', 'attr': {'class': 'materialize-textarea', 'data-length': '200'}}) }}
+                            <label for="textarea" class="center-align">Description</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12">
+                            {{ form_row(form.valide, {'attr': {'class': 'btn black waves-effect waves-light col s12'}}) }}
+                        </div>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -29,7 +29,18 @@
                                 </div>
                             {% endif %}
                         {% else %}
-
+                            <div class="rating">
+                                <a onclick="M.toast({html: 'Veuillez vous connecter pour voter'})"
+                                   title="Donner 4 étoiles">☆</a>
+                                <a onclick="M.toast({html: 'Veuillez vous connecter pour voter'})"
+                                   title="Donner 5 étoiles">☆</a>
+                                <a onclick="M.toast({html: 'Veuillez vous connecter pour voter'})"
+                                   title="Donner 3 étoiles">☆</a>
+                                <a onclick="M.toast({html: 'Veuillez vous connecter pour voter'})"
+                                   title="Donner 2 étoiles">☆</a>
+                                <a onclick="M.toast({html: 'Veuillez vous connecter pour voter'})"
+                                   title="Donner 1 étoile">☆</a>
+                            </div>
                         {% endif %}
                     </div>
                 </div>

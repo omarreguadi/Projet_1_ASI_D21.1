@@ -11,11 +11,61 @@
 {% block nav %}
 {% include "browser/browser.html.twig" %}
 {% endblock nav %}
-{% if is_granted('IS_AUTHENTICATED_FULLY') %} 
+{% if is_granted('ROLE_ADMIN') %} 
+<p>Welcome {{ app.user.email }}</p>
+
+{% elseif is_granted('ROLE_USER') %}   
 <p>Welcome {{ app.user.firstname }}</p>
-{% else %}   
+
+{% else %}
 <p>Welcome Anonymous</p>
+
 {% endif %}
+    <div class="container mt-3">
+        <form class="pull-right hidden" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
+            <div class="input-field">
+                <i class="material-icons prefix">search</i>
+                <input type="text" id="search" class="validate" name="search">
+                <label for="search" class="center-align">Tapez votre recherche ici</label>
+                <span class="input-group-btn">
+                    <div class="center-align">
+                        <button type="submit" class="btn black">Rechercher</button>
+                    </div>
+              </span>
+            </div>
+        </form>
+    </div>
+    {% for page in pagination %}
+        <div class="container">
+            <div class="row mt-3 mb-3">
+                <div class="col s12 m12">
+                    <div class="card white hoverable">
+                        <div class="card-content white-text">
+                            <span class="card-action">
+                                <h4>
+                                    <a href="{{ path('conferenceId', {'id': page.id}) }}">{{ page.title }}</a>
+                                </h4>
+                            </span>
+                            <p class="black-font">{{ page.description }}</p>
+                        </div>
+                        <div class="card-action">
+                            <p class="mt-1"><i>{{ page.createdAt|date("d/m/Y") }}</i></p>
+                        </div>
+                    </div>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div>
+                            <a class="mr-1" href="{{ path('edit_conference', {'id': page.id}) }}">Modifier
+                                ✍🏼</a>
+                            <a href="{{ path('remove_conference', {'id': page.id}) }}">Supprimer 🗑️</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <ul class="pagination">
+        <li class="waves-effect">{{ knp_pagination_render(pagination) }}</li>
+    </ul>
 
 
 {% endblock %}
