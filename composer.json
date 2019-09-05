@@ -17,6 +17,7 @@
         "symfony/yaml": "4.3.*"
     },
     "require-dev": {
+        "hautelook/alice-bundle": "^2.5",
         "symfony/maker-bundle": "^1.13",
         "symfony/profiler-pack": "^1.0"
     },
