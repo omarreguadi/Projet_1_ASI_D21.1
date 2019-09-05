@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         <div class="row mt-3 mb-3">
-            <div class="col m8 offset-m2">
+            <div class="col-lg-8 col-lg-offset-2">
                 <div class="card blue-grey darken-1 pd-4">
                     <div class="card-content white-text">
                         <span class="card-title">
@@ -40,6 +40,7 @@
                                    title="Donner 2 étoiles">☆</a>
                                 <a onclick="M.toast({html: 'Veuillez vous connecter pour voter'})"
                                    title="Donner 1 étoile">☆</a>
+                                <a class="btn btn-primary" href="/login" role="button">inscription pour vote</a>
                             </div>
                         {% endif %}
                     </div>

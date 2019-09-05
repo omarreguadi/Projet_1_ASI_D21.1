@@ -1,15 +1,25 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello ConferenceController!{% endblock %}
-
 {% block body %}
-{% block nav %}
-{% include "browser/browser.html.twig" %}
-{% endblock nav %}
-    {{ form_start(form) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.createdAt) }}
-    {{ form_row(form.add) }}
-    {{ form_end(form) }}
+    <div class="container mt-3 mb-3">
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date de création</th>
+                <th>Moyenne</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in vote %}
+                <tr>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.description }}</td>
+                    <td>{{ i.createdAt|date("d/m/Y") }}</td>
+                    <td>{{ i.scoreAvg|round(1,'floor') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

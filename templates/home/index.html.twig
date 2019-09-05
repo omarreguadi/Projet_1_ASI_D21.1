@@ -55,17 +55,27 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <div>
                             <a class="mr-1" href="{{ path('edit_conference', {'id': page.id}) }}">Modifier
-                                ✍🏼</a>
-                            <a href="{{ path('remove_conference', {'id': page.id}) }}">Supprimer 🗑️</a>
+                               </a>
+                            <a href="{{ path('remove_conference', {'id': page.id}) }}">Supprimer </a>
                         </div>
+
                     {% endif %}
                 </div>
             </div>
         </div>
     {% endfor %}
+    <div class="container">
+    <div class="d-flex">
+    <div class="col-md-6">
     <ul class="pagination">
         <li class="waves-effect">{{ knp_pagination_render(pagination) }}</li>
     </ul>
+    </div>
+    <div class="col-md-6">
+    <a class="btn btn-primary" href="/admin/conference/topDix" role="button">voir les conferences les plus notées</a>
+    </div>
+    </div>
+    </div>
 
 
 {% endblock %}
