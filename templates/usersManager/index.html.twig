@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+{{ parent() }}
+
+{% endblock %}
+
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block body %}
+
+{% block nav %}
+{% include "browser/browser.html.twig" %}
+{% endblock nav %}
+<table class="table">
+  <thead class="thead-dark">
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Email</th>
+  </thead>
+ {% for users in allUsers %}
+ <tbody>
+  <tr>
+    <td>{{users.firstname}}</td>
+    <td>{{users.lastname}}</td>
+    <td>{{users.email}}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
