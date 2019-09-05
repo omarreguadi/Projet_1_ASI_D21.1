@@ -1,3 +1,5 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1d094996459041c08501068fd5df5310)](https://www.codacy.com/app/ZinebElam/Projet_1_ASI_D21.1?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=omarreguadi/Projet_1_ASI_D21.1&amp;utm_campaign=Badge_Grade)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -26,3 +28,4 @@ docker-compose up -d
 docker-compose exec --user=application web bash
 ```
 # Projet_1_ASI_D21.1
+
