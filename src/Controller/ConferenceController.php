@@ -17,6 +17,10 @@ class ConferenceController extends AbstractController
 {
     /**
      * @Route("/admin/conference", name="conference")
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @param UserRepository $userRepository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function create(Request $request, \Swift_Mailer $mailer, UserRepository $userRepository)
     {
