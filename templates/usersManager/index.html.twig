@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
 {{ parent() }}
-
 {% endblock %}
 
 {% block title %}Gestion des utilisateurs{% endblock %}
@@ -11,11 +10,15 @@
 {% block nav %}
 {% include "browser/browser.html.twig" %}
 {% endblock nav %}
+
 <table class="table">
   <thead class="thead-dark">
     <th>Firstname</th>
     <th>Lastname</th>
     <th>Email</th>
+    <th>Modifier</th>
+    <th>Supprimer</th>
+    <th class="removeEscape"><a href="/createdUser" class="btn btn-primary">Ajouter</a></th>
   </thead>
  {% for users in allUsers %}
  <tbody>
@@ -23,6 +26,8 @@
     <td>{{users.firstname}}</td>
     <td>{{users.lastname}}</td>
     <td>{{users.email}}</td>
+    <td><a href="{{ path('edited_user', {'id': users.id}) }}" class="btn btn-secondary">Modifier</a></td>
+    <td><a href="{{ path('removed_user', {'id': users.id}) }}" class="btn btn-danger">Supprimer</a></td>
   </tr>
   {% endfor %}
   </tbody>
