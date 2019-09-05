@@ -28,8 +28,7 @@ class ProfileController extends AbstractController
             $this->addFlash('green', 'Modification enregistrer !');
             return $this->redirectToRoute('home');
         }
-        return $this->render('profile/editProfileUser.html.twig', [
-            'controller_name' => 'ProfileController',
+        return $this->render('profile/editprofile.html.twig', [
             'form' => $form->createView(),
         ]);
     }
