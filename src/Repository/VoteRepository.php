@@ -20,10 +20,11 @@ class VoteRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Vote::class);
     }
+
     public function averageTopDix()
     {
         return $this->createQueryBuilder('v')// Base pour crée nimporte quelle requete
-        ->select("avg(v.score) as score_avg, c.name, c.id")// Select ou Insert ou Update ou Delete
+        ->select("avg(v.score) as score_avg, c.title, c.id")// Select ou Insert ou Update ou Delete
         ->join("v.conference", 'c')// Jointure sur la table conference
         ->groupBy('v.conference') // regroupe par conference
         ->orderBy('score_avg', 'desc')// desc: grand->petit en fonction de la moyenne (asc : petit->grand)
@@ -33,7 +34,7 @@ class VoteRepository extends ServiceEntityRepository
     }
     public function averageByUser($parameter){
         return $this->createQueryBuilder('v')
-            ->select("avg(v.score) as scoreAvg, c.name, c.description, c.createdAt, c.id")
+            ->select("avg(v.score) as scoreAvg, c.title, c.description, c.createdAt, c.id")
             ->join('v.conference', 'c')
             ->join('v.user','u')
             ->where('v.user = :parameter')
@@ -44,7 +45,7 @@ class VoteRepository extends ServiceEntityRepository
     }
     public function averageWithoutUser($parameter){
         return $this->createQueryBuilder('v')
-            ->select("avg(v.score) as scoreAvg, c.name, c.description, c.createdAt, c.id")
+            ->select("avg(v.score) as scoreAvg, c.title, c.description, c.createdAt, c.id")
             ->join('v.conference', 'c')
             ->join('v.user','u')
             ->where('v.user != :parameter')
