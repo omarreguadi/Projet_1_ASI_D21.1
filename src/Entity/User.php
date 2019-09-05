@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -18,89 +20,69 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $firstname;
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
-
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $password;
-
     /**
      * @ORM\Column(type="simple_array")
      */
     private $roles = [];
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="user")
      */
-    private $votes;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Conference", inversedBy="users")
-     */
-    private $conference;
-
+    private $userVote;
     public function __construct()
     {
-        $this->votes = new ArrayCollection();
         $this->roles = array('ROLE_USER');
+        $this->userVote = new ArrayCollection();
     }
-
     public function getId(): ?int
     {
         return $this->id;
     }
-
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
-
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
-
         return $this;
     }
-
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
-
-    public function setLastname(string $lastname): self
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
-
         return $this;
     }
-
     public function getEmail(): ?string
     {
         return $this->email;
     }
-
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -110,16 +92,13 @@ class User implements UserInterface
         $this->password = $password;
         return $this;
     }
-
     public function getRoles(): ?array
     {
         return $this->roles;
     }
-
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
     public function getSalt()
@@ -134,47 +113,30 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
-
     /**
      * @return Collection|Vote[]
      */
-    public function getVotes(): Collection
+    public function getUserVote(): Collection
     {
-        return $this->votes;
+        return $this->userVote;
     }
-
-    public function addVote(Vote $vote): self
+    public function addUserVote(Vote $userVote): self
     {
-        if (!$this->votes->contains($vote)) {
-            $this->votes[] = $vote;
-            $vote->setUser($this);
+        if (!$this->userVote->contains($userVote)) {
+            $this->userVote[] = $userVote;
+            $userVote->setUser($this);
         }
-
         return $this;
     }
-
-    public function removeVote(Vote $vote): self
+    public function removeUserVote(Vote $userVote): self
     {
-        if ($this->votes->contains($vote)) {
-            $this->votes->removeElement($vote);
+        if ($this->userVote->contains($userVote)) {
+            $this->userVote->removeElement($userVote);
             // set the owning side to null (unless already changed)
-            if ($vote->getUser() === $this) {
-                $vote->setUser(null);
+            if ($userVote->getUser() === $this) {
+                $userVote->setUser(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getConference(): ?Conference
-    {
-        return $this->conference;
-    }
-
-    public function setConference(?Conference $conference): self
-    {
-        $this->conference = $conference;
-
         return $this;
     }
 }

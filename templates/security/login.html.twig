@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+{% block nav %}
+{% include "browser/browser.html.twig" %}
+{% endblock nav %}
     {{ form_start(form) }}
     {{ form_row(form.email) }}
     {{ form_row(form.password) }}
