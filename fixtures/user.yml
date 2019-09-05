@@ -4,7 +4,6 @@ App\Entity\User:
     lastname: <lastName()>
     email: <email()>
     password: <password()>
-
   user_{1}:
     email: "admin@admin.com"
     password: <password()>

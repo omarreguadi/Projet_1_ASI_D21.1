@@ -1,4 +1,5 @@
 App\Entity\Vote:
+  
   vote_{1..30}:
     conference: "@conference_*"
     user: "@user_*"

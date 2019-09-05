@@ -1,4 +1,5 @@
 App\Entity\Conference:
+
   conference_{1..30}:
     title: <firstname()>
     description: <text()>
