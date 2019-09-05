@@ -38,12 +38,6 @@ class ConferenceController extends AbstractController
                     ->setBody('You should see me from the profiler!');
                 $mailer->send($message);
             }
-
-
-
-
-
-
             return $this->redirectToRoute('home');
         }
 
@@ -99,7 +93,6 @@ class ConferenceController extends AbstractController
         $this->addFlash('notice', 'Element supprimer !');
         return $this->redirectToRoute('home');
     }
-
     /**
      * @Route("/user/conference/vote", name="conferenceVote")
      */
