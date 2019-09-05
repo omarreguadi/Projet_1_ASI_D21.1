@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Repository;
-
 use App\Entity\Vote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-
 /**
  * @method Vote|null find($id, $lockMode = null, $lockVersion = null)
  * @method Vote|null findOneBy(array $criteria, array $orderBy = null)
@@ -16,11 +13,9 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class VoteRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
-
     {
         parent::__construct($registry, Vote::class);
     }
-
     public function averageTopDix()
     {
         return $this->createQueryBuilder('v')// Base pour crée nimporte quelle requete
@@ -62,7 +57,6 @@ class VoteRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
     // /**
     //  * @return Vote[] Returns an array of Vote objects
     //  */
@@ -79,7 +73,6 @@ class VoteRepository extends ServiceEntityRepository
         ;
     }
     */
-
     /*
     public function findOneBySomeField($value): ?Vote
     {
