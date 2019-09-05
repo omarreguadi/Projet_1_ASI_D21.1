@@ -18,50 +18,44 @@
 <p>Welcome {{ app.user.firstname }}</p>
 
 {% else %}
-<p>Welcome Anonymous</p>
+<h3 style="text-align: center">Welcome</h3>
 
 {% endif %}
-    <div class="container mt-3">
-        <form class="pull-right hidden" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
-            <div class="input-field">
-                <i class="material-icons prefix">search</i>
-                <input type="text" id="search" class="validate" name="search">
-                <label for="search" class="center-align">Tapez votre recherche ici</label>
-                <span class="input-group-btn">
+    <div class="container mt-3 col-md-6">
+        <form class="navbar-form" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
+            <div class="input-group add-on">
+                <input type="text" id="search" placeholder="Search conference" class="form-control" name="search">
                     <div class="center-align">
-                        <button type="submit" class="btn black">Rechercher</button>
+                        <button type="submit" class="btn btn-outline-primary">search</button>
                     </div>
-              </span>
             </div>
         </form>
     </div>
     {% for page in pagination %}
         <div class="container">
-            <div class="row mt-3 mb-3">
-                <div class="col s12 m12">
-                    <div class="card white hoverable">
-                        <div class="card-content white-text">
-                            <span class="card-action">
-                                <h4>
-                                    <a href="{{ path('conferenceId', {'id': page.id}) }}">{{ page.title }}</a>
-                                </h4>
-                            </span>
-                            <p class="black-font">{{ page.description }}</p>
+            <div class="row mt-3 mb-3 d-flex justify-content-center">
+                    <div class="card text-center" style="width: 50rem;">
+                        <div class="card-header">
+                            <h3><a href="{{ path('conferenceId', {'id': page.id}) }}">{{ page.title }}</a></h3>
                         </div>
-                        <div class="card-action">
+                        <div class="card-body">
+
+                            <p class="card-text">{{ page.description }}</p>
+
+                        </div>
+                        <div class="card-footer text-muted">
                             <p class="mt-1"><i>{{ page.createdAt|date("d/m/Y") }}</i></p>
                         </div>
                     </div>
                     {% if is_granted('ROLE_ADMIN') %}
                         <div>
-                            <a class="mr-1" href="{{ path('edit_conference', {'id': page.id}) }}">Modifier
+                            <a class="mr-1" href="{{ path('editconf', {'id': page.id}) }}">Modifier
                                 ✍🏼</a>
                             <a href="{{ path('remove_conference', {'id': page.id}) }}">Supprimer 🗑️</a>
                         </div>
                     {% endif %}
                 </div>
             </div>
-        </div>
     {% endfor %}
     <ul class="pagination">
         <li class="waves-effect">{{ knp_pagination_render(pagination) }}</li>
