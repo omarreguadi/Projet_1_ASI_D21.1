@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'utilisateur{% endblock %}
+
+{% block body %}
+    {% block nav %}
+        {% include "browser/browser.html.twig" %}
+    {% endblock nav %}
+    <div class="container-fluid col-2 text-center mt-4">
+        {{ form_start(form) }}
+        <div class="form-group mt-3">
+            {{ form_row(form.firstname, {'attr': {'class': 'form-control text-center'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.lastname, {'attr': {'class': 'form-control text-center'}}) }}
+        </div>
+        <div class="form-group mt-3">
+            {{ form_row(form.email, {'attr': {'class': 'form-control text-center'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.Modifier, {'attr': {'class': 'form-control btn btn-primary'}}) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
