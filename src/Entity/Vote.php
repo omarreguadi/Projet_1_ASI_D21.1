@@ -17,50 +17,31 @@ class Vote
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $score;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="votes")
-     */
-    private $user;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Conference", inversedBy="votes")
      */
-
+    private $conference;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userVote")
+     */
+    private $user;
     public function getId(): ?int
     {
         return $this->id;
     }
-
     public function getScore(): ?int
     {
         return $this->score;
     }
-
-    public function setScore(int $score): self
+    public function setScore(?int $score): self
     {
         $this->score = $score;
-
         return $this;
     }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getConference(): ?Conference
     {
         return $this->conference;
@@ -68,6 +49,15 @@ class Vote
     public function setConference(?Conference $conference): self
     {
         $this->conference = $conference;
+        return $this;
+    }
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
         return $this;
     }
 }

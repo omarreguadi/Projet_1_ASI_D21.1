@@ -16,7 +16,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class VoteRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
-
     {
         parent::__construct($registry, Vote::class);
     }
@@ -28,12 +27,12 @@ class VoteRepository extends ServiceEntityRepository
             ->groupBy('v.conference')
             ->orderBy('score_avg', 'desc')
             ->setMaxResults(10)
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
     }
+
     public function avgByUser($parameter){
         return $this->createQueryBuilder('v')
-            ->select("avg(v.score) as scoreAvg, c.id, c.name, c.description, c.createdAt")
+            ->select("avg(v.score) as scoreAvg, c.name, c.description, c.createdAt, c.id")
             ->join('v.conference', 'c')
             ->join('v.user','u')
             ->where('v.user = :parameter')
@@ -42,7 +41,9 @@ class VoteRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
     public function avgWithoutUser($parameter){
+
         return $this->createQueryBuilder('v')
             ->select("avg(v.score) as scoreAvg, c.id, c.name, c.description, c.createdAt")
             ->join('v.conference', 'c')

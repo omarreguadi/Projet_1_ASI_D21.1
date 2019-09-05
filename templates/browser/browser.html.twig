@@ -8,17 +8,37 @@
       <li class="nav-item active">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
-       {% if is_granted('IS_AUTHENTICATED_FULLY')%} 
+       {% if is_granted('ROLE_ADMIN') %} 
       <li class="nav-item">
         <a class="nav-link" href="/profile">Profile</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/conference">Conference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/userManager">Gestion des utilisateurs</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/logout">Logout</a>
       </li>
-      {% else %} 
+      {% elseif is_granted('ROLE_USER') %} 
+       <li class="nav-item">
+        <a class="nav-link" href="/profile">Profile</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/conference">Conference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+      {% else %}
        <li class="nav-item">
         <a class="nav-link" href="/login">Connection</a>
       </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/search">search</a>
+        </li>
+
       {% endif %}
     </ul>
   </div>

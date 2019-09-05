@@ -5,6 +5,7 @@ use App\Form\ConferenceType;
 use App\Repository\UserRepository;
 use App\Repository\VoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,14 +13,15 @@ use Symfony\Component\HttpFoundation\Request;
 class ConferenceController extends AbstractController
 {
     /**
-     * @Route("/conference", name="conference")
+     * @Route("/admin/conference", name="conference")
      * @param Request $request
      * @param \Swift_Mailer $mailer
      * @param UserRepository $userRepository
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function index(Request $request, \Swift_Mailer $mailer, UserRepository $userRepository)
-    {   $conference = new Conference();
+    public function create(Request $request, \Swift_Mailer $mailer, UserRepository $userRepository)
+    {
+        $conference = new Conference();
         $form = $this->createForm(ConferenceType::class, $conference);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -29,11 +31,12 @@ class ConferenceController extends AbstractController
             $this->addFlash('notice', 'You created a new conference !');
             // $this->redirectToRoute(‘register_sucess’);
             $user = $userRepository->findAll();
+
             foreach ($user as $value){
-                $message = (new \Swift_Message('Hello Email'))
+                $message = (new \Swift_Message('New conference'))
                     ->setFrom('zineb.elamrani96@gmail.com')
                     ->setTo($value->getEmail())
-                    ->setBody('Check the profiler!');
+                    ->setBody('You should see me from the profiler!');
                 $mailer->send($message);
             }
             return $this->redirectToRoute('home');
@@ -42,8 +45,9 @@ class ConferenceController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     /**
-     * @Route("/admin/conference/edit_conference/{id}", name="edit_conference")
+     * @Route("/admin/conference/edit/{id}", name="edit_conference")
      * @param Request $request
      * @param Conference|null $conference
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
@@ -59,32 +63,43 @@ class ConferenceController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($conference);
             $entityManager->flush();
-            $this->addFlash('notice', 'Modify register !');
+            $this->addFlash('green', 'Modify register !');
             return $this->redirectToRoute('home');
         }
-        return $this->render('conference/edit_conference.html.twig', [
+        return $this->render('conference/editconf.html.twig', [
             'form' => $form->createView(),
         ]);
     }
+
     /**
-     * @Route("/admin/conference/topten", name="topten")
+     * @Route("/admin/conference/topDix", name="topDix")
      * @param VoteRepository $voteRepository
-     * @return Response
      */
-    public function topTen(VoteRepository $voteRepository)
+    public function topDix(VoteRepository $voteRepository)
     {
         $conferences = $voteRepository->avgTopTen();
-        return $this->render('conference/topTen.html.twig', [
+
+        return $this->render('conference/toptenconf.html.twig', [
             'conferences' => $conferences
         ]);
     }
-    public function delete(EntityManagerInterface $em, Conference $conference)
+
+
+    /**
+     * @Route("/admin/conference/remove/{id}", name="remove_conference")
+     * @ParamConverter("conference", options={"mapping"={"id"="id"}})
+     * @param EntityManagerInterface $entityManager
+     * @param Conference $conference
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function delete(EntityManagerInterface $entityManager, Conference $conference)
     {
-        $em->remove($conference);
-        $em->flush();
-        $this->addFlash('notice', 'Item deleted !');
+        $entityManager->remove($conference);
+        $entityManager->flush();
+        $this->addFlash('notice', 'Item delete !');
         return $this->redirectToRoute('home');
     }
+
     /**
      * @Route("/user/conference/vote", name="conferenceVote")
      * @param VoteRepository $voteRepository
@@ -97,6 +112,7 @@ class ConferenceController extends AbstractController
             'vote' => $uservote
         ]);
     }
+
     /**
      * @Route("/user/conference/withoutcote", name="conferenceWithoutVote")
      * @param VoteRepository $voteRepository
@@ -105,7 +121,7 @@ class ConferenceController extends AbstractController
     public function conferenceWithoutVote(VoteRepository $voteRepository){
         $usercurrent = $this->getUser();
         $uservote = $voteRepository->avgWithoutUser($usercurrent);
-        return $this->render('conference/without_vote.html.twig',[
+        return $this->render('conference/withoutvote.html.twig',[
             'vote' => $uservote
         ]);
     }
