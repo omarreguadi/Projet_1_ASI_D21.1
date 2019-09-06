@@ -11,13 +11,7 @@
 {% block nav %}
 {% include "browser/browser.html.twig" %}
 {% endblock nav %}
-    <div class="container mt-3">
-        <form class="pull-right hidden" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
-            <div class="input-field">
-                <i class="material-icons prefix">search</i>
-                <input type="text" id="search" class="validate" name="search">
-                <label for="search" class="center-align">Tapez votre recherche ici</label>
-                <span class="input-group-btn">
+
     <div class="container mt-3 col-md-6">
         <form class="navbar-form" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
             <div class="input-group add-on">
@@ -56,17 +50,18 @@
     {% endfor %}
     <div class="container">
     <div class="d-flex">
-        <div class="form-group form-inline mb-2 offset-4">
-            <ul class="pagination">
-                <li class="waves-effect" style="margin-right: 150px">{{ knp_pagination_render(pagination) }}</li>
-            </ul>
-            <a class="btn btn-primary"  style="margin-right: 150px" href="/admin/conference/topDix" role="button">voir les conferences les plus notées</a>
 
-        </div>
+    <div class="col-md-6">
+    <ul class="pagination">
+        <li class="waves-effect">{{ knp_pagination_render(pagination) }}</li>
+    </ul>
+    </div>
+    <div class="col-md-6 d-flex">
+    <a class="btn btn-primary" href="/admin/conference/topDix" role="button">voir les conferences les plus notées</a>
+        <a class="btn btn-primary" href="/user/conference/vote" role="button">voir les conferences deja voté</a>
+        <a class="btn btn-primary" href="/user/conference/withoutvote" role="button">voir les conferences non voté</a>
+    </div>
 
     </div>
     </div>
-
-
-
 {% endblock %}

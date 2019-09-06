@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Repository;
+
 use App\Entity\Vote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+
 /**
  * @method Vote|null find($id, $lockMode = null, $lockVersion = null)
  * @method Vote|null findOneBy(array $criteria, array $orderBy = null)
@@ -13,17 +16,19 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class VoteRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
+
     {
         parent::__construct($registry, Vote::class);
     }
+
     public function averageTopDix()
     {
-        return $this->createQueryBuilder('v')// Base pour crée nimporte quelle requete
-        ->select("avg(v.score) as score_avg, c.title, c.id")// Select ou Insert ou Update ou Delete
-        ->join("v.conference", 'c')// Jointure sur la table conference
-        ->groupBy('v.conference') // regroupe par conference
-        ->orderBy('score_avg', 'desc')// desc: grand->petit en fonction de la moyenne (asc : petit->grand)
-        ->setMaxResults(10)// LIMIT = 10
+        return $this->createQueryBuilder('v')
+        ->select("avg(v.score) as score_avg, c.title, c.id")
+        ->join("v.conference", 'c')
+        ->groupBy('v.conference')
+        ->orderBy('score_avg', 'desc')
+        ->setMaxResults(10)
         ->getQuery()
             ->getResult();
     }
@@ -32,7 +37,7 @@ class VoteRepository extends ServiceEntityRepository
             ->select("avg(v.score) as scoreAvg, c.title, c.description, c.createdAt, c.id")
             ->join('v.conference', 'c')
             ->join('v.user','u')
-            ->where('v.user = :parameter')
+            ->where('v.user != :parameter')
             ->groupBy('c.id')
             ->setParameter('parameter', $parameter)
             ->getQuery()
@@ -43,7 +48,7 @@ class VoteRepository extends ServiceEntityRepository
             ->select("avg(v.score) as scoreAvg, c.title, c.description, c.createdAt, c.id")
             ->join('v.conference', 'c')
             ->join('v.user','u')
-            ->where('v.user != :parameter')
+            ->where('v.user = :parameter')
             ->groupBy('c.id')
             ->setParameter('parameter', $parameter)
             ->getQuery()
@@ -57,6 +62,7 @@ class VoteRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
     // /**
     //  * @return Vote[] Returns an array of Vote objects
     //  */
@@ -73,6 +79,7 @@ class VoteRepository extends ServiceEntityRepository
         ;
     }
     */
+
     /*
     public function findOneBySomeField($value): ?Vote
     {
@@ -85,3 +92,4 @@ class VoteRepository extends ServiceEntityRepository
     }
     */
 }
+

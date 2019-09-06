@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="container mt-3 mb-3">
-        <table class="striped">
+        <table class="">
             <thead>
             <tr>
                 <th>Titre</th>
@@ -13,7 +13,7 @@
             <tbody>
             {% for i in vote %}
                 <tr>
-                    <td>{{ i.name }}</td>
+                    <td>{{ i.title }}</td>
                     <td>{{ i.description }}</td>
                     <td>{{ i.createdAt|date("d/m/Y") }}</td>
                     <td>{{ i.scoreAvg|round(1,'floor') }}</td>

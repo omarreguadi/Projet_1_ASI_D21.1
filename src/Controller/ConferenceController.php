@@ -14,10 +14,6 @@ class ConferenceController extends AbstractController
 {
     /**
      * @Route("/conference", name="conference")
-     * @param Request $request
-     * @param \Swift_Mailer $mailer
-     * @param UserRepository $userRepository
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function create(Request $request, \Swift_Mailer $mailer, UserRepository $userRepository)
     {
@@ -28,7 +24,10 @@ class ConferenceController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($conference);
             $entityManager->flush();
-            $this->addFlash('success', 'la conference a bien ete cree !');
+
+            $this->addFlash('success', 'la conference a ete cree !');
+
+
             $user = $userRepository->findAll();
             foreach ($user as $value){
                 $message = (new \Swift_Message('Nouvelle conference'))
@@ -60,7 +59,9 @@ class ConferenceController extends AbstractController
             $this->addFlash('green', 'Modification enregistrer !');
             return $this->redirectToRoute('home');
         }
-        return $this->render('conference/edit_conference.html.twig', [
+
+        return $this->render('conference/editconf.html.twig', [
+
             'form' => $form->createView(),
         ]);
     }
@@ -105,11 +106,8 @@ class ConferenceController extends AbstractController
             'vote' => $uservote
         ]);
     }
-
     /**
-     * @Route("/user/conference/withoutcote", name="conferenceWithoutVote")
-     * @param VoteRepository $voteRepository
-     * @return Response
+     * @Route("/user/conference/withoutvote", name="conferenceWithoutVote")
      */
     public function conferenceWithoutVote(VoteRepository $voteRepository){
         $usercurrent = $this->getUser();
