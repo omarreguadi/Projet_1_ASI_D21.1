@@ -36,5 +36,6 @@ docker-compose exec --user=application web bash
 	#
 	# Application: http://127.0.0.1:81
 	# phpMyAdmin: http://127.0.0.1:8080
-  # Mailhog: http://127.0.0.1:1025
+	# Mailhog: http://127.0.0.1:1025
+
  
