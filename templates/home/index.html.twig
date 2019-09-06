@@ -11,16 +11,6 @@
 {% block nav %}
 {% include "browser/browser.html.twig" %}
 {% endblock nav %}
-{% if is_granted('ROLE_ADMIN') %} 
-<p>Welcome {{ app.user.email }}</p>
-
-{% elseif is_granted('ROLE_USER') %}   
-<p>Welcome {{ app.user.firstname }}</p>
-
-{% else %}
-<p>Welcome Anonymous</p>
-
-{% endif %}
     <div class="container mt-3">
         <form class="pull-right hidden" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
             <div class="input-field">

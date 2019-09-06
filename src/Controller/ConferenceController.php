@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ConferenceController extends AbstractController
 {
     /**
-     * @Route("/admin/conference", name="conference")
+     * @Route("/conference", name="conference")
      */
     public function create(Request $request, \Swift_Mailer $mailer, UserRepository $userRepository)
     {
