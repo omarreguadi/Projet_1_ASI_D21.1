@@ -29,9 +29,10 @@ docker-compose up -d
 docker-compose exec --user=application web bash
 ```
 #### fixture and command for Create an admin 
-  docker-compose exec web bash -c "php bin/console hautelook:fixtures:load --purge-with-truncate -q"
-	docker-compose exec web bash -c "php bin/console app:create-admin adminViaMakefile@admin.com admin"
-
+```bash
+ - docker-compose exec web bash -c "php bin/console hautelook:fixtures:load --purge-with-truncate -q"
+ - docker-compose exec web bash -c "php bin/console app:create-admin adminViaMakefile@admin.com admin"
+```
 # Projet Conferences
 	#
 	# Application: http://127.0.0.1:81
