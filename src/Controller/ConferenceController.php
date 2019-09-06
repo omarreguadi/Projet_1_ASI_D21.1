@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ConferenceController extends AbstractController
 {
     /**
-     * @Route("/admin/conference", name="conference")
+     * @Route("/conference", name="conference")
      */
     public function create(Request $request, \Swift_Mailer $mailer, UserRepository $userRepository)
     {
@@ -27,13 +27,13 @@ class ConferenceController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($conference);
             $entityManager->flush();
-            $this->addFlash('success', 'la conference a bien ete cree !');
+            $this->addFlash('success', 'la conference a ete cree !');
 
             $user = $userRepository->findAll();
 
             foreach ($user as $value){
                 $message = (new \Swift_Message('Nouvelle conference'))
-                    ->setFrom('paiva.raphaelt@gmail.com')
+                    ->setFrom('omarreguadi@gmail.com')
                     ->setTo($value->getEmail())
                     ->setBody('You should see me from the profiler!');
                 $mailer->send($message);
@@ -64,7 +64,7 @@ class ConferenceController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('conference/edit_conference.html.twig', [
+        return $this->render('conference/editconf.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -102,11 +102,9 @@ class ConferenceController extends AbstractController
         return $this->render('conference/vote.html.twig',[
             'vote' => $uservote
         ]);
-
     }
-
     /**
-     * @Route("/user/conference/withoutcote", name="conferenceWithoutVote")
+     * @Route("/user/conference/withoutvote", name="conferenceWithoutVote")
      */
     public function conferenceWithoutVote(VoteRepository $voteRepository){
         $usercurrent = $this->getUser();
