@@ -11,17 +11,13 @@
 {% block nav %}
 {% include "browser/browser.html.twig" %}
 {% endblock nav %}
-{% if is_granted('ROLE_ADMIN') %}
-<h3 style="text-align: center">Welcome {{ app.user.email }}</h3>
-
-{% elseif is_granted('ROLE_USER') %}
-    <h3 style="text-align: center">Welcome {{ app.user.firstname }}  </h3>
-
-
-{% else %}
-<h3 style="text-align: center">Welcome</h3>
-
-{% endif %}
+    <div class="container mt-3">
+        <form class="pull-right hidden" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
+            <div class="input-field">
+                <i class="material-icons prefix">search</i>
+                <input type="text" id="search" class="validate" name="search">
+                <label for="search" class="center-align">Tapez votre recherche ici</label>
+                <span class="input-group-btn">
     <div class="container mt-3 col-md-6">
         <form class="navbar-form" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
             <div class="input-group add-on">

@@ -19,7 +19,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class HomeController extends Controller
 {
 
-
     /**
      * @Route("/", name="home")
      */
