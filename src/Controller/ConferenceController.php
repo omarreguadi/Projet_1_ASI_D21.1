@@ -107,13 +107,7 @@ class ConferenceController extends AbstractController
         ]);
     }
     /**
-<<<<<<< HEAD
      * @Route("/user/conference/withoutvote", name="conferenceWithoutVote")
-=======
-     * @Route("/user/conference/withoutcote", name="conferenceWithoutVote")
-     * @param VoteRepository $voteRepository
-     * @return Response
->>>>>>> dev
      */
     public function conferenceWithoutVote(VoteRepository $voteRepository){
         $usercurrent = $this->getUser();
