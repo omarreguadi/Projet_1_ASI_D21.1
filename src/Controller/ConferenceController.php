@@ -13,15 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 class ConferenceController extends AbstractController
 {
     /**
-<<<<<<< HEAD
      * @Route("/conference", name="conference")
-=======
-     * @Route("/admin/conference", name="conference")
      * @param Request $request
      * @param \Swift_Mailer $mailer
      * @param UserRepository $userRepository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
->>>>>>> dev
      */
     public function create(Request $request, \Swift_Mailer $mailer, UserRepository $userRepository)
     {
@@ -36,7 +32,7 @@ class ConferenceController extends AbstractController
             $user = $userRepository->findAll();
             foreach ($user as $value){
                 $message = (new \Swift_Message('Nouvelle conference'))
-                    ->setFrom('paiva.raphaelt@gmail.com')
+                    ->setFrom('omarreguadi@gmail.com')
                     ->setTo($value->getEmail())
                     ->setBody('You should see me from the profiler!');
                 $mailer->send($message);

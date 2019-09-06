@@ -11,7 +11,6 @@
 {% block nav %}
 {% include "browser/browser.html.twig" %}
 {% endblock nav %}
-<<<<<<< HEAD
     <div class="container mt-3">
         <form class="pull-right hidden" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
             <div class="input-field">
@@ -19,22 +18,10 @@
                 <input type="text" id="search" class="validate" name="search">
                 <label for="search" class="center-align">Tapez votre recherche ici</label>
                 <span class="input-group-btn">
-=======
-{% if is_granted('ROLE_ADMIN') %} 
-<p>Welcome {{ app.user.email }}</p>
-
-{% elseif is_granted('ROLE_USER') %}   
-<p>Welcome {{ app.user.firstname }}</p>
-
-{% else %}
-<h3 style="text-align: center">Welcome</h3>
-
-{% endif %}
     <div class="container mt-3 col-md-6">
         <form class="navbar-form" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
             <div class="input-group add-on">
                 <input type="text" id="search" placeholder="Search conference" class="form-control" name="search">
->>>>>>> dev
                     <div class="center-align">
                         <button type="submit" class="btn btn-outline-primary">search</button>
                     </div>
@@ -70,16 +57,17 @@
     {% endfor %}
     <div class="container">
     <div class="d-flex">
-    <div class="col-md-6">
-    <ul class="pagination">
-        <li class="waves-effect">{{ knp_pagination_render(pagination) }}</li>
-    </ul>
+        <div class="form-group form-inline mb-2 offset-4">
+            <ul class="pagination">
+                <li class="waves-effect" style="margin-right: 150px">{{ knp_pagination_render(pagination) }}</li>
+            </ul>
+            <a class="btn btn-primary"  style="margin-right: 150px" href="/admin/conference/topDix" role="button">voir les conferences les plus notées</a>
+
+        </div>
+
     </div>
-    <div class="col-md-6">
-    <a class="btn btn-primary" href="/admin/conference/topDix" role="button">voir les conferences les plus notées</a>
     </div>
-    </div>
-    </div>
+
 
 
 {% endblock %}
