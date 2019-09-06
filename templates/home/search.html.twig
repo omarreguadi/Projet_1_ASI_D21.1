@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-3">
+        <form class="pull-right hidden" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
+            <div class="input-field">
+                <i class="">search</i>
+                <input type="text" id="search" class="validate" name="search">
+                <label for="search" class="center-align">Tapez votre recherche ici</label>
+                <span class="input-group-btn">
+                    <div class="center-align">
+                        <button type="submit" class="btn black">Rechercher</button>
+                    </div>
+              </span>
+            </div>
+        </form>
+    </div>
+
+    {% if res|default is empty %}
+        <p class="search">Aucun resultats</p>
+    {% endif %}
+
+    {% if data|default is empty %}
+        <p class="search">Veuillez saisir au moins un caractères</p>
+    {% endif %}
+
+    <p class="search">Resultat de la recherche pour "{{ data }}"</p>
+
+    {% for i in res %}
+        <div class="container">
+            <div class="row mt-3 mb-3">
+                <div class="col s12 m12">
+                    <div class="card white">
+                        <div class="card-content white-text">
+                            <span class="card-action"><h4>
+                            <a href="{{ path('conferenceId', {'id' :i.id}) }}">{{ i.title }}</a></h4></span>
+                            <p style="color:black;">{{ i.description }}</p>
+                        </div>
+                        <div class="card-action">
+                            <p style="margin-top:5px;"><i>{{ i.createdAt.date }}</i></p>
+                        </div>
+                    </div>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div class="form-group">
+                            <a class="mr-3" href="{{ path('edit_conference', {'id': i.id}) }}">Modifier 🖊️</a>
+                            <a href="{{ path('remove_conference', {'id': i.id}) }}">Supprimer 🗑️</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

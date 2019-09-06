@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+{{ parent() }}
+
+{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+{% block nav %}
+{% include "browser/browser.html.twig" %}
+{% endblock nav %}
+
+    <div class="container mt-3 col-md-6">
+        <form class="navbar-form" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
+            <div class="input-group add-on">
+                <input type="text" id="search" placeholder="Search conference" class="form-control" name="search">
+                    <div class="center-align">
+                        <button type="submit" class="btn btn-outline-primary">search</button>
+                    </div>
+            </div>
+        </form>
+    </div>
+    {% for page in pagination %}
+        <div class="container">
+            <div class="row mt-3 mb-3 d-flex justify-content-center">
+                    <div class="card text-center" style="width: 50rem;">
+                        <div class="card-header">
+                            <h3><a href="{{ path('conferenceId', {'id': page.id}) }}">{{ page.title }}</a></h3>
+                        </div>
+                        <div class="card-body">
+
+                            <p class="card-text">{{ page.description }}</p>
+
+                        </div>
+                        <div class="card-footer text-muted">
+                            <p class="mt-1"><i>{{ page.createdAt|date("d/m/Y") }}</i></p>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div>
+                            <a href="{{ path('edit_conference', {'id': page.id}) }}" class="btn btn-primary">Modifier</a>
+                            <a href="{{ path('remove_conference', {'id': page.id}) }}" class="btn btn-danger">Supprimer</a>
+                        </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+    {% endfor %}
+    <div class="container">
+    <div class="d-flex">
+
+    <div class="col-md-2 m-b-10">
+    <ul class="pagination">
+        <li class="waves-effect">{{ knp_pagination_render(pagination) }}</li>
+    </ul>
+    </div>
+     <div class="group-buttons-conference">
+        <a class="btn btn-warning" href="/admin/conference/topDix" role="button">voir les conferences les plus notées</a>
+        <a class="btn btn-primary" href="/user/conference/vote" role="button">voir les conferences deja voté</a>
+        <a class="btn btn-secondary" href="/user/conference/withoutvote" role="button">voir les conferences non voté</a>
+    </div>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container mt-3 mb-3">
+        <table class="">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Date de création</th>
+                <th>Moyenne</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in vote %}
+                <tr>
+                    <td>{{ i.title }}</td>
+                    <td>{{ i.description }}</td>
+                    <td>{{ i.createdAt|date("d/m/Y") }}</td>
+                    <td>{{ i.scoreAvg|round(1,'floor') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

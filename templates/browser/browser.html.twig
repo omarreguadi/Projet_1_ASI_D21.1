@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/browser.css')}}">
+{% endblock %}
+
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
+  <a class="navbar-brand">Projet_1_ASI</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+       {% if is_granted('ROLE_ADMIN') %} 
+      <li class="nav-item">
+        <a class="nav-link" href="/profile">Profile</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/conference">Conference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/usersManager">Gestion des utilisateurs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+      {% elseif is_granted('ROLE_USER') %} 
+       <li class="nav-item">
+        <a class="nav-link" href="/profile">Profile</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/conference">Conference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+      {% else %}
+       <li class="nav-item">
+        <a class="nav-link" href="/login">Connexion</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+  {% if is_granted('ROLE_ADMIN') %}
+    <div class="userIcon1">
+       <i class="fa fa-user" aria-hidden="false"></i>
+       <p>Welcome {{ app.user.email }}</p>
+    </div>
+  {% elseif is_granted('ROLE_USER') %}   
+    <div class="userIcon1">
+       <i class="fa fa-user" aria-hidden="false"></i>
+       <p>Welcome {{ app.user.firstname }}</p>
+    </div>
+{% endif %}    
+</nav>
+{% endblock body %}
+
