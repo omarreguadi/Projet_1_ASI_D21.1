@@ -11,11 +11,12 @@
 {% block nav %}
 {% include "browser/browser.html.twig" %}
 {% endblock nav %}
-{% if is_granted('ROLE_ADMIN') %} 
-<p>Welcome {{ app.user.email }}</p>
+{% if is_granted('ROLE_ADMIN') %}
+<h3 style="text-align: center">Welcome {{ app.user.email }}</h3>
 
-{% elseif is_granted('ROLE_USER') %}   
-<p>Welcome {{ app.user.firstname }}</p>
+{% elseif is_granted('ROLE_USER') %}
+    <h3 style="text-align: center">Welcome {{ app.user.firstname }}  </h3>
+
 
 {% else %}
 <h3 style="text-align: center">Welcome</h3>
@@ -60,16 +61,17 @@
     {% endfor %}
     <div class="container">
     <div class="d-flex">
-    <div class="col-md-6">
-    <ul class="pagination">
-        <li class="waves-effect">{{ knp_pagination_render(pagination) }}</li>
-    </ul>
+        <div class="form-group form-inline mb-2 offset-4">
+            <ul class="pagination">
+                <li class="waves-effect" style="margin-right: 150px">{{ knp_pagination_render(pagination) }}</li>
+            </ul>
+            <a class="btn btn-primary"  style="margin-right: 150px" href="/admin/conference/topDix" role="button">voir les conferences les plus notées</a>
+
+        </div>
+
     </div>
-    <div class="col-md-6">
-    <a class="btn btn-primary" href="/admin/conference/topDix" role="button">voir les conferences les plus notées</a>
     </div>
-    </div>
-    </div>
+
 
 
 {% endblock %}
