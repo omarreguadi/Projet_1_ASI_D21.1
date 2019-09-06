@@ -51,15 +51,16 @@
     <div class="container">
     <div class="d-flex">
 
-    <div class="col-md-6">
+    <div class="col-md-2 m-b-10">
     <ul class="pagination">
         <li class="waves-effect">{{ knp_pagination_render(pagination) }}</li>
     </ul>
     </div>
-    <div class="col-md-6 d-flex">
-    <a class="btn btn-primary" href="/admin/conference/topDix" role="button">voir les conferences les plus notées</a>
+     <div class="group-buttons-conference">
+        <a class="btn btn-warning" href="/admin/conference/topDix" role="button">voir les conferences les plus notées</a>
+        <a class="btn btn-primary" href="/user/conference/vote" role="button">voir les conferences deja voté</a>
+        <a class="btn btn-secondary" href="/user/conference/withoutvote" role="button">voir les conferences non voté</a>
     </div>
-
     </div>
     </div>
 {% endblock %}
