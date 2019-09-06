@@ -1,14 +1,24 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-{% block nav %}
-{% include "browser/browser.html.twig" %}
-{% endblock nav %}
-    {{ form_start(form) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.password) }}
-    {{ form_row(form.submit) }}
-    {{ form_end(form) }}
-       <div class="registerUser">
-           <a href="/register">Pas encore inscrit?</a>
-       </div>
+    {% block nav %}
+        {% include "browser/browser.html.twig" %}
+    {% endblock nav %}
+    <div class="container">
+    <div class="row">
+        <div class=col-12>
+            <h1>Login</h1>
+            <p>Fill out this form to log into your account. You don't have an account yet ? <a href="/register">Register</a> now !</p>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-8">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+            {{ form_row(form.password, {'attr': {'class': 'form-control'}})  }}
+            <br>
+            {{ form_row(form.submit, {'attr': {'class': 'btn btn-primary btn-primary'}}) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}
