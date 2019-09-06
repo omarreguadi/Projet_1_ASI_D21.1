@@ -1,3 +1,6 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1d094996459041c08501068fd5df5310)](https://www.codacy.com/app/ZinebElam/Projet_1_ASI_D21.1?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=omarreguadi/Projet_1_ASI_D21.1&amp;utm_campaign=Badge_Grade)
+# Projet_1_ASI_D21.1
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -25,4 +28,13 @@ cp .env.dist .env
 docker-compose up -d
 docker-compose exec --user=application web bash
 ```
-# Projet_1_ASI_D21.1
+#### fixture and command for Create an admin 
+```bash
+ - docker-compose exec web bash -c "php bin/console hautelook:fixtures:load --purge-with-truncate -q"
+ - docker-compose exec web bash -c "php bin/console app:create-admin adminViaMakefile@admin.com admin"
+```
+# Projet Conferences
+	#
+	# Application: http://127.0.0.1:81
+	# phpMyAdmin: http://127.0.0.1:8080
+	# Mailhog: http://127.0.0.1:1025
