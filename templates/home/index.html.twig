@@ -46,15 +46,14 @@
                         </div>
                         <div class="card-footer text-muted">
                             <p class="mt-1"><i>{{ page.createdAt|date("d/m/Y") }}</i></p>
-                        </div>
-                    </div>
+
                     {% if is_granted('ROLE_ADMIN') %}
                         <div>
-                            <a class="mr-1" href="{{ path('editconf', {'id': page.id}) }}">Modifier
-                                ✍🏼</a>
-                            <a href="{{ path('remove_conference', {'id': page.id}) }}">Supprimer 🗑️</a>
+                            <button type="button" class="btn btn-primary" href="{{ path('edit_conference', {'id': page.id}) }}">Modifier</button>
+                            <button type="button" class="btn btn-danger" href="{{ path('remove_conference', {'id': page.id}) }}">Supprimer</button>
                         </div>
-
+                        </div>
+                    </div>
                     {% endif %}
                 </div>
             </div>
